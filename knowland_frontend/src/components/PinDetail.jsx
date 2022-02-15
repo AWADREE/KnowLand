@@ -10,7 +10,7 @@ import { pinDetailQuery, pinDetailAdvancedMorePinsQuery } from "../utils/data"; 
 import Spinner from "./Spinner"; //loading animation componenet
 import { useRef } from "react";
 
-const PinDetail = ({ user }) => {
+const PinDetail = ({ user, scrollToRef }) => {
   const [pins, setPins] = useState(null);
   const [pinDetail, setPinDetail] = useState(null);
   const [comment, setComment] = useState("");
@@ -160,12 +160,16 @@ const PinDetail = ({ user }) => {
     fetchPinDetails(); //whenever the pinid changes feth the new pin details
   }, [pinId]);
 
+  useEffect(() => {
+    scrollToRef();
+  }, [pinId]);
+
   if (!pinDetail) return <Spinner message="Loading pin..." />; //if pindetail is still null then just render a loading animation
 
   return (
     <>
       <div
-        className="flex xl-flex-row flex-col m-auto bg-white "
+        className="flex xl-flex-row flex-col m-auto bg-white"
         style={{ maxWidth: "1500px", borderRadius: "32px" }}
       >
         <div className="flex justify-center items-center md:items-start flex-initial">
