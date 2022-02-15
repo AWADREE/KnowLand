@@ -15,7 +15,7 @@ const breakpointObj = {
 
 const MasonryLayout = ({ pins }) => {
   return (
-    <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointObj}>
+    <Masonry className="flex animate-slide-fwd " breakpointCols={breakpointObj}>
       {/* if pins are not null then map the array and give each a key which is = to the pin doc _id*/}
       {pins?.map((pin) => (
         <Pin key={pin._id} pin={pin} className="w-max" />

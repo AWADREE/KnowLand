@@ -92,7 +92,7 @@ const Home = () => {
       </div>
 
       {/* removed  */}
-      <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
+      <div className="pb-2 flex-1 h-screen" ref={scrollRef}>
         {/* the routes are here so that everything before them is always there in the app on all pages/routes */}
         <Routes>
           {/* : in the string means that what comes after will be dynamic, and this userId its value can be retreaved later useing useParams hook*/}

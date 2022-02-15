@@ -61,7 +61,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="relative pb-2 h-full justify-center items-center">
+    <div className="relative pb-2 h-full justify-center items-center overflow-y-scroll">
       <div className="felx flex-col pb-5">
         <div className="relative flex flex-col mb-7">
           <div className="flex flex-col justify-center items-center">
