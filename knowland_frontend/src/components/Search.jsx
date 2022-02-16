@@ -10,6 +10,7 @@ const Search = ({ searchTerm }) => {
 
   useEffect(() => {
     setLoading(true);
+    searchTerm = searchTerm.trim();
 
     if (searchTerm) {
       const query = searchQuery(searchTerm.toLowerCase());
@@ -19,10 +20,12 @@ const Search = ({ searchTerm }) => {
         setLoading(false);
       });
     } else {
-      client.fetch(feedQuery).then((data) => {
-        setPins(data);
-        setLoading(false);
-      });
+      setTimeout(() => {
+        client.fetch(feedQuery).then((data) => {
+          setPins(data);
+          setLoading(false);
+        });
+      }, 300);
     }
   }, [searchTerm]);
 
