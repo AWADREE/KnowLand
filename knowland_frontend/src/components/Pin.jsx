@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; //for navigation
 import { v4 as uuidv4 } from "uuid"; //for creating unique keys for mapping
 import { MdDownloadForOffline } from "react-icons/md"; //icon
-import { AiTwotoneDelete } from "react-icons/ai"; //icon
+// import { AiTwotoneDelete } from "react-icons/ai"; //icon
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs"; //icon
 import { AiFillHeart } from "react-icons/ai"; //icon
-import { useLocation } from "react-router-dom";
 import { client, urlFor } from "../client"; //sanity client config and image url maker
 import { fetchUser } from "../utils/fetchUser"; //util function that fiches the user from local storage
 
@@ -14,7 +13,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
   const navigate = useNavigate(); //using the usenavigate hook
-  const location = useLocation();
   const user = fetchUser(); //fetching user from localstorage
   //checking if alrdy saved by user
   //getting all the saves of this pin (the likes of the pin) and comparing these ids of the users who posted these saves(postedBy._id) with the current user id
@@ -69,12 +67,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   };
 
   //delete the pin
-  const deletePin = (id) => {
-    client.delete(id).then(() => {
-      //refresh page
-      window.location.reload();
-    });
-  };
+  // const deletePin = (id) => {
+  //   client.delete(id).then(() => {
+  //     //refresh page
+  //     window.location.reload();
+  //   });
+  // };
 
   return (
     <div className="m-2">
@@ -163,7 +161,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 </a>
               ) : undefined}
 
-              {postedBy?._id === user.googleId && (
+              {/* {postedBy?._id === user.googleId && (
                 <button
                   type="button"
                   onClick={(e) => {
@@ -174,7 +172,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 >
                   <AiTwotoneDelete />
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         )}
@@ -194,7 +192,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           src={postedBy?.image}
           alt="user-profile"
         />
-        <p className="font-semibold capitalize">{postedBy?.userName}</p>
+        {/* <p className="font-semibold capitalize">{postedBy?.userName}</p> */}
+        <p className="font-semibold capitalize">
+          {postedBy?.userName.length > 16
+            ? `${postedBy.userName.slice(0, 16)}...`
+            : postedBy.userName}
+        </p>
       </Link>
     </div>
   );

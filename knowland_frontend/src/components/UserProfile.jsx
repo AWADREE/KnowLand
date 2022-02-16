@@ -139,10 +139,10 @@ const UserProfile = () => {
   return (
     <div
       ref={scrollRef}
-      className="relative pb-2 h-full justify-center items-center overflow-y-scroll"
+      className="relative pb-2 h-full justify-center items-center overflow-y-scroll overscroll-contain"
     >
-      <div className="felx flex-col pb-5">
-        <div className="relative flex flex-col mb-7">
+      <div className="felx flex-col">
+        <div className="relative flex flex-col">
           <div className="flex flex-col justify-center items-center">
             {coverImageAsset && (
               <div className="absolute top-60 2xl:top-96 right-0">

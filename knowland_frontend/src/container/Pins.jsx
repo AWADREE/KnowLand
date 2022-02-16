@@ -13,7 +13,10 @@ const Pins = ({ user }) => {
   };
 
   return (
-    <div className="px-2 md:px-5 h-full overflow-y-scroll" ref={scrollRef}>
+    <div
+      className="px-2 md:px-5 h-full overflow-y-scroll overscroll-contain"
+      ref={scrollRef}
+    >
       <div className="bg-gray-50">
         <Navbar
           searchTerm={searchTerm}
