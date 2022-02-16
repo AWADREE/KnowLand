@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdDownloadForOffline } from "react-icons/md"; //icon
 import { AiFillHeart } from "react-icons/ai"; //icon
-import { Link, useParams } from "react-router-dom"; //for navigation an retreaving dynamic path
+import { Link, useParams, useNavigate } from "react-router-dom"; //for navigation an retreaving dynamic path
 import { v4 as uuidv4 } from "uuid"; //for creating unique keys
 import { AiTwotoneDelete } from "react-icons/ai"; //icon
 import { client, urlFor } from "../client"; //sanity config and image url maker
@@ -20,6 +20,7 @@ const PinDetail = ({ user, scrollToRef }) => {
   //id of a post from the useParams as we made it a dynamic string in the path
   // /pin-detail/pinId
   const { pinId } = useParams(); //thats how u fetch a dynamic param from a path
+  const navigate = useNavigate(); //useing  usenavigate hook
 
   let query = useRef(pinDetailQuery(pinId));
   let morePins = useRef([]);
@@ -158,6 +159,7 @@ const PinDetail = ({ user, scrollToRef }) => {
   //delete the pin
   const deletePin = (id) => {
     client.delete(id).then(() => {
+      navigate("/", { replace: true });
       //refresh page
       window.location.reload();
     });
