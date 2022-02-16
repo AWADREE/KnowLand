@@ -80,7 +80,12 @@ const Sidebar = ({ user, closeToggle }) => {
               className="w-10 h-10 rounded-full"
               alt="user-profile"
             />
-            <p>{user.userName}</p>
+
+            <p>
+              {user.userName.length > 25
+                ? `${user.userName.slice(0, 25)}...`
+                : user.userName}
+            </p>
           </Link>
         </div>
       )}
