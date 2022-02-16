@@ -17,5 +17,10 @@ export default {
       title: "Image",
       type: "string",
     },
+    {
+      name: "coverImage",
+      title: "CoverImage",
+      type: "image",
+    },
   ],
 };

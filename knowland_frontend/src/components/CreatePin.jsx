@@ -31,11 +31,12 @@ const CreatePin = ({ user }) => {
       setWrongImageType(false);
       setLoading(true);
 
+      //we upload the image to the sanity assets
       client.assets
         .upload("image", e.target.files[0], {
           contentType: type,
           filename: name,
-        })
+        }) //then we set the image asset state to the doc we created in the assets
         .then((document) => {
           setImageAsset(document);
           setLoading(false);
