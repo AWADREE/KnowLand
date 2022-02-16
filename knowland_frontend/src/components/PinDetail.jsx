@@ -188,8 +188,6 @@ const PinDetail = ({ user, scrollToRef }) => {
           />
         </div>
         <div className="w-full p-5 flex-1 xl:min-w-620">
-          {/* c */}
-
           <div className="flex justify-center">
             {alreadySaved ? (
               <button
@@ -224,9 +222,6 @@ const PinDetail = ({ user, scrollToRef }) => {
             )}
           </div>
 
-          {/* c */}
-
-          {/* changed justify-between to start */}
           <div className="flex items-center justify-between">
             <div className="flex justify-between items-center">
               <div className="flex gap-2 items-center">
@@ -242,10 +237,6 @@ const PinDetail = ({ user, scrollToRef }) => {
                 </a>
               </div>
               <a href={pinDetail.destination} target="_blank" rel="noreferrer">
-                {/* {pinDetail.destination} */}
-                {/*{pinDetail.destination.slice(8).length > 0
-                ? pinDetail.destination.slice(8, 30) + "...": undefined} */}
-
                 {pinDetail.destination.slice(8).length > 0
                   ? pinDetail.destination.length > 30
                     ? pinDetail.destination.slice(0, 30) + "..."
@@ -307,11 +298,9 @@ const PinDetail = ({ user, scrollToRef }) => {
             ))}
           </div>
           <div className="flex flex-wrap mt-6 gap-3">
-            {/* changed pinDetail.postedBy to user */}
             <Link to={`user-profile/${user?._id}`}>
               <img
                 className="w-10 h-10 rounded-full cursor-pointer"
-                //changed this from pinDetail.postedBy?.image to user?.image
                 src={user?.image}
                 alt="user-profile"
               />
