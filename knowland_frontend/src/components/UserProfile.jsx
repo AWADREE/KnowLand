@@ -139,7 +139,7 @@ const UserProfile = () => {
   return (
     <div
       ref={scrollRef}
-      className="relative pb-2 h-full justify-center items-center overflow-y-scroll"
+      className="relative pb-2 h-full justify-center items-center overflow-y-scroll overscroll-contain"
     >
       <div className="felx flex-col pb-5">
         <div className="relative flex flex-col mb-7">

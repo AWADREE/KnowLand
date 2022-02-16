@@ -5,7 +5,6 @@ import { MdDownloadForOffline } from "react-icons/md"; //icon
 import { AiTwotoneDelete } from "react-icons/ai"; //icon
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs"; //icon
 import { AiFillHeart } from "react-icons/ai"; //icon
-import { useLocation } from "react-router-dom";
 import { client, urlFor } from "../client"; //sanity client config and image url maker
 import { fetchUser } from "../utils/fetchUser"; //util function that fiches the user from local storage
 
@@ -14,7 +13,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const [postHovered, setPostHovered] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
   const navigate = useNavigate(); //using the usenavigate hook
-  const location = useLocation();
   const user = fetchUser(); //fetching user from localstorage
   //checking if alrdy saved by user
   //getting all the saves of this pin (the likes of the pin) and comparing these ids of the users who posted these saves(postedBy._id) with the current user id
