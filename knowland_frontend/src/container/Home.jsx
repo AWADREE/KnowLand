@@ -5,7 +5,6 @@ import { Link, Route, Routes } from "react-router-dom"; //for routing
 import { Sidebar, UserProfile } from "../components"; //imprting multiple componenets
 import Pins from "../container/Pins";
 import { userQuery } from "../utils/data"; //importing query syntax from data file
-
 import { client } from "../client"; //importying sanity client configuration file
 import logo from "../Assets/logo.png";
 import { fetchUser } from "../utils/fetchUser"; //importing util. function that fetches the user from local storage
@@ -35,7 +34,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
+    <div className="home flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out">
       <div className="hidden md:flex h-screen flex-initial">
         {/* if user exists then send the user otherwise pass false */}
         <Sidebar user={user && user} />
@@ -92,7 +91,7 @@ const Home = () => {
       </div>
 
       {/* removed  */}
-      <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
+      <div className="pb-2 flex-1 h-4/5 md:h-full " ref={scrollRef}>
         {/* the routes are here so that everything before them is always there in the app on all pages/routes */}
         <Routes>
           {/* : in the string means that what comes after will be dynamic, and this userId its value can be retreaved later useing useParams hook*/}
