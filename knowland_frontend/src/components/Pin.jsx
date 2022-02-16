@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; //for navigation
 import { v4 as uuidv4 } from "uuid"; //for creating unique keys for mapping
 import { MdDownloadForOffline } from "react-icons/md"; //icon
-import { AiTwotoneDelete } from "react-icons/ai"; //icon
+// import { AiTwotoneDelete } from "react-icons/ai"; //icon
 import { BsFillArrowUpRightCircleFill } from "react-icons/bs"; //icon
 import { AiFillHeart } from "react-icons/ai"; //icon
 import { client, urlFor } from "../client"; //sanity client config and image url maker
@@ -67,12 +67,12 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   };
 
   //delete the pin
-  const deletePin = (id) => {
-    client.delete(id).then(() => {
-      //refresh page
-      window.location.reload();
-    });
-  };
+  // const deletePin = (id) => {
+  //   client.delete(id).then(() => {
+  //     //refresh page
+  //     window.location.reload();
+  //   });
+  // };
 
   return (
     <div className="m-2">
@@ -161,7 +161,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 </a>
               ) : undefined}
 
-              {postedBy?._id === user.googleId && (
+              {/* {postedBy?._id === user.googleId && (
                 <button
                   type="button"
                   onClick={(e) => {
@@ -172,7 +172,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 >
                   <AiTwotoneDelete />
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         )}
