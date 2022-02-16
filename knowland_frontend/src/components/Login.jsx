@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; //to be able to navigate paths
 import { FcGoogle } from "react-icons/fc"; //google icon
 import shareVideo from "../Assets/share.mp4"; //login screen background video
 import logo from "../Assets/logowhite.png"; //home screen app logo
+// import coverPlaceholder from "../Assets/coverPlaceholder.png"; //home screen app logo
 
 import { client } from "../client";
 
@@ -15,21 +16,16 @@ const Login = () => {
     //getting the profile object from the response and turning it into json,
     //and setting it to be the key value for the key name user in the local storage
     localStorage.setItem("user", JSON.stringify(response.profileObj)); //so that we can retreave the user data from it when we need to(in the Util. function)
-
     const { name, googleId, imageUrl } = response.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
 
-    //_property is written like that so that sanity knows which docs are we creating,
-    //the _ is a property which sanity alrdy has
-    //and in this case its the user
-    //created a const object
     const doc = {
       _id: googleId, //set the _id to the googleId we retreaved from the profileObj
       _type: "user", //we want the type of the doc we will create using this object to be of type user
       //these next two values are the only fields needed to create a new user
       userName: name, //set the username property to the name we retreaved
       image: imageUrl, //set the image prop to the  imageurl we retreaved
+      coverImage: null, //set the image prop to the  imageurl we retreaved
     };
-
     //creating a sanity doc if it doesnt alrdy exist, with the valuse of the doc object
     client
       .createIfNotExists(doc)
@@ -39,6 +35,13 @@ const Login = () => {
         navigate("/", { replace: true }); //replace the current route with the new one
       });
   };
+
+  // const responseGoogle = (response) => {
+  //   localStorage.setItem("user", JSON.stringify(response.profileObj)); //so that we can retreave the user data from it when we need to(in the Util. function)
+  //   const { name, googleId, imageUrl } = response.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
+
+  //   client.delete(googleId);
+  // };
 
   return (
     //check tailwind docs for the styling classes
