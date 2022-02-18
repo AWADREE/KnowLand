@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { Navbar, Feed, PinDetail, CreatePin, Search } from "../components"; //importing multiple componenets at the same time
@@ -6,14 +6,25 @@ import { Navbar, Feed, PinDetail, CreatePin, Search } from "../components"; //im
 const Pins = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState(""); //state to conatin the value of the search term
   //this state is here so we can pass it through props to other componenes routed from this componenet
-  const scrollRef = useRef(null);
 
+  const scrollRef = useRef(null);
   const scrollToRef = () => {
     scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const scrollHandler = () => {
+    // console.log(childRef);
+    // if (window.pageYOffset + window.innerHeight >= childRef.current.offsetTop) {
+    //   console.log(`Hidden element is now visible`);
+    // } else {
+    //   console.log("page" + window.pageYOffset + window.innerHeight);
+    //   console.log("element" + childRef.current.offsetTop);
+    // }
+  };
+
   return (
     <div
+      onScroll={scrollHandler}
       className="px-2 md:px-5 h-full overflow-y-scroll overscroll-contain"
       ref={scrollRef}
     >

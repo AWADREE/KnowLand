@@ -14,9 +14,9 @@ const PinDetail = ({ user, scrollToRef }) => {
   const [pins, setPins] = useState(null);
   const [pinDetail, setPinDetail] = useState(null);
   const [comment, setComment] = useState("");
+  const [visibleComments, setVisibleComments] = useState(3);
   const [addingComment, setAddingComment] = useState(false);
   const [savingPost, setSavingPost] = useState(false);
-
   //id of a post from the useParams as we made it a dynamic string in the path
   // /pin-detail/pinId
   const { pinId } = useParams(); //thats how u fetch a dynamic param from a path
@@ -29,13 +29,14 @@ const PinDetail = ({ user, scrollToRef }) => {
   const addComment = () => {
     if (comment) {
       setAddingComment(true);
+      let trimmedComment = comment.trim();
 
       client
         .patch(pinId)
         .setIfMissing({ comments: [] })
         .insert("after", "comments[-1]", [
           {
-            comment,
+            comment: trimmedComment,
             _key: uuidv4(),
             postedBy: {
               _type: "postedBy",
@@ -165,6 +166,10 @@ const PinDetail = ({ user, scrollToRef }) => {
     });
   };
 
+  const loadMoreComments = () => {
+    setVisibleComments((prevValue) => prevValue + 5);
+  };
+
   //the location of this useeffect is important to be before the if statment
   useEffect(() => {
     fetchPinDetails(); //whenever the pinid changes feth the new pin details
@@ -281,24 +286,38 @@ const PinDetail = ({ user, scrollToRef }) => {
             </p>
           </Link>
           <h2 className="mt-5 text-2xl">Comments</h2>
-          <div className="max-h-370 overflow-y-auto">
-            {pinDetail?.comments?.map((comment, i) => (
-              <div
-                className="flex gap-2 mt-5 items-center bg-white rounded-lg"
-                key={i}
-              >
-                <img
-                  src={comment.postedBy.image}
-                  alt="user-profile"
-                  className="w-10 h-10 rounded-full cursor-pointer"
-                />
-                <div className="flex flex-col">
-                  <p className="font-bold">{comment.postedBy.userName}</p>
-                  <p>{comment.comment}</p>
+          <div className=" overflow-y-auto">
+            {pinDetail?.comments
+              ?.slice(0, visibleComments)
+              .map((comment, i) => (
+                <div
+                  className="flex gap-2 mt-5 items-center bg-white rounded-lg"
+                  key={i}
+                >
+                  <img
+                    src={comment.postedBy.image}
+                    alt="user-profile"
+                    className="w-10 h-10 rounded-full cursor-pointer"
+                  />
+                  <div className="flex flex-col">
+                    <p className="font-bold">{comment.postedBy.userName}</p>
+                    <p>{comment.comment}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
+          {pinDetail?.comments?.length > visibleComments && (
+            <div className="flex justify-center pt-5">
+              <button
+                type="button"
+                className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
+                onClick={loadMoreComments}
+              >
+                Load more
+              </button>
+            </div>
+          )}
+
           <div className="flex flex-wrap mt-6 gap-3">
             <Link to={`user-profile/${user?._id}`}>
               <img
