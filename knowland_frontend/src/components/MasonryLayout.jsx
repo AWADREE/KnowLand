@@ -12,14 +12,13 @@ const breakpointObj = {
   500: 1,
 };
 
-const MasonryLayout = ({ pins }) => {
-  const [visiblePins, setVisiblePins] = useState(20);
+const MasonryLayout = ({ pins, visiblePins }) => {
+  // const [visiblePins, setVisiblePins] = useState(20);
+  // const loadMorePins = () => {
+  //   setVisiblePins((prevVisablePins) => prevVisablePins + 20);
+  // };
   //   // const scrollRef = useRef();
   //   // const scrollable = useRef();
-
-  const loadMorePins = () => {
-    setVisiblePins((prevVisablePins) => prevVisablePins + 20);
-  };
 
   //   // useEffect(() => {
   //   //   console.log(`effect`);
@@ -35,22 +34,18 @@ const MasonryLayout = ({ pins }) => {
         breakpointCols={breakpointObj}
       >
         {/* if pins are not null then map the array and give each a key which is = to the pin doc _id*/}
-        {pins?.slice(0, visiblePins).map((pin) => (
-          <Pin key={pin._id} pin={pin} className="w-max" />
-        ))}
+        {visiblePins
+          ? pins
+              ?.slice(0, visiblePins)
+              .map((pin) => <Pin key={pin._id} pin={pin} className="w-max" />)
+          : pins?.map((pin) => (
+              <Pin key={pin._id} pin={pin} className="w-max" />
+            ))}
       </Masonry>
-      {/* <div ref={forwardedRef} className="p-5 w-full bg-black"></div> */}
-      {pins?.length > visiblePins && (
-        <div className="flex justify-center pt-5">
-          <button
-            type="button"
-            className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
-            onClick={loadMorePins}
-          >
-            Load more
-          </button>
-        </div>
-      )}
+
+      <div className="flex justify-center items-center">
+        <h2>No more pins available!</h2>
+      </div>
     </>
   );
 };

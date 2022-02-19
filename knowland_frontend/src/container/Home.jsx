@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { HiMenu } from "react-icons/hi"; //icon
-import { AiFillCloseCircle } from "react-icons/ai"; //icon
-import { Link, Route, Routes } from "react-router-dom"; //for routing
+import { Link, Route, Routes, useLocation } from "react-router-dom"; //for routing
 import { Sidebar, UserProfile } from "../components"; //imprting multiple componenets
 import Pins from "../container/Pins";
 import { userQuery } from "../utils/data"; //importing query syntax from data file
@@ -12,10 +11,22 @@ import { fetchUser } from "../utils/fetchUser"; //importing util. function that 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false); //state for the navbar
   const [user, setUser] = useState(null); //state to store the user
-  const scrollRef = useRef(null); //crating a scrollRef to scroll to
+  const locaiton = useLocation(); //using location to get current pathname
+  const pinsForwardedRef = useRef(null); // a ref forwarded to pins to ref th scrollable div
+  const profileForwardedRef = useRef(null); // a ref forwarded to pins to ref th scrollable div
+
   //getting the user from local storage using a utility function,
   ////getting the user from local storage
   const userInfo = fetchUser();
+
+  const scrollToRef = () => {
+    pinsForwardedRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    // forwardedRef.current.scrollTo(0, 0);
+  };
+  const scrollToProfileTop = () => {
+    profileForwardedRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    // forwardedRef.current.scrollTo(0, 0);
+  };
 
   //only on mount set the user state to the user doc where the id is the one saved in localstorage
   ////getting the sanity user doc of our user
@@ -30,7 +41,7 @@ const Home = () => {
   //only on mount
   useEffect(() => {
     //scroll to the scroll ref
-    scrollRef.current.scrollTo(0, 0);
+    pinsForwardedRef.current?.scrollTo(0, 0);
   }, []);
 
   return (
@@ -48,18 +59,33 @@ const Home = () => {
               setToggleSidebar(true);
             }}
           />
-          <Link to="/">
-            <img src={logo} alt="logo" className="w-28" />
-          </Link>
+          {locaiton.pathname == "/" ? (
+            <img onClick={scrollToRef} src={logo} alt="logo" className="w-28" />
+          ) : (
+            <Link to="/">
+              <img src={logo} alt="logo" className="w-28" />
+            </Link>
+          )}
+
           {/* if there is a user in the state then get his _id */}
-          <Link to={`user-profile/${user?._id}`}>
-            {/* if there is a user then get his image */}
+
+          {locaiton.pathname.startsWith(`/user-profile/${user?._id}`) ? (
             <img
+              onClick={scrollToProfileTop}
               src={user?.image}
-              alt="logo"
+              alt="user"
               className="w-9 h-9 rounded-full"
             />
-          </Link>
+          ) : (
+            <Link to={`user-profile/${user?._id}`}>
+              {/* if there is a user then get his image */}
+              <img
+                src={user?.image}
+                alt="user"
+                className="w-9 h-9 rounded-full"
+              />
+            </Link>
+          )}
         </div>
         {/* if toggleSidebar is true then render this jsx */}
         {toggleSidebar && (
@@ -91,14 +117,26 @@ const Home = () => {
       </div>
 
       {/* removed  */}
-      <div className="pb-2 flex-1 h-4/5 md:h-full " ref={scrollRef}>
+      <div className="pb-2 flex-1 h-4/5 md:h-full ">
         {/* the routes are here so that everything before them is always there in the app on all pages/routes */}
         <Routes>
           {/* : in the string means that what comes after will be dynamic, and this userId its value can be retreaved later useing useParams hook*/}
           {/* any path entered starting with /user-profile/ thena varibale path,  render the UserProfile component in it*/}
-          <Route path="/user-profile/:userId" element={<UserProfile />} />
+          <Route
+            path="/user-profile/:userId"
+            element={<UserProfile forwardedRef={profileForwardedRef} />}
+          />
           {/* any path entered starting with /  render the Pins component in it*/}
-          <Route path="/*" element={<Pins user={user && user} />} />
+          <Route
+            path="/*"
+            element={
+              <Pins
+                user={user && user}
+                forwardedRef={pinsForwardedRef}
+                scrollToRef={scrollToRef}
+              />
+            }
+          />
         </Routes>
       </div>
     </div>
