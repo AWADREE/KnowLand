@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const user = fetchUser();
     if (!user) navigate("/login");
-  }, [third]);
+  }, []);
 
   return (
     <Routes>
