@@ -10,7 +10,7 @@ import { pinDetailQuery, pinDetailAdvancedMorePinsQuery } from "../utils/data"; 
 import Spinner from "./Spinner"; //loading animation componenet
 import { useRef } from "react";
 
-const PinDetail = ({ user, scrollToRef }) => {
+const PinDetail = ({ user, scrollToRef, visiblePins }) => {
   const [pins, setPins] = useState(null);
   const [pinDetail, setPinDetail] = useState(null);
   const [comment, setComment] = useState("");
@@ -273,7 +273,7 @@ const PinDetail = ({ user, scrollToRef }) => {
             <p className="mt-1">Category: {pinDetail.category}</p>
           </div>
           <Link
-            to={`user-profile/${pinDetail.postedBy?._id}`}
+            to={`/user-profile/${pinDetail.postedBy?._id}`}
             className="flex gap-2 mt-5 items-center bg-white rounded-lg"
           >
             <img
@@ -350,7 +350,7 @@ const PinDetail = ({ user, scrollToRef }) => {
             More like this
           </h2>
 
-          <MasonryLayout pins={pins} />
+          <MasonryLayout pins={pins} visiblePins={visiblePins} />
         </>
       ) : (
         <Spinner message="Loading more pins..." />

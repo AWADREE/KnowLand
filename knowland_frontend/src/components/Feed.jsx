@@ -6,7 +6,7 @@ import { feedQuery, searchQuery } from "../utils/data"; //importing sanity quiri
 import MasonryLayout from "./MasonryLayout"; //for rendering pins
 import Spinner from "./Spinner"; //for loading
 
-const Feed = () => {
+const Feed = ({ visiblePins }) => {
   const [loading, setLoading] = useState(false);
   const [pins, setPins] = useState(null);
   const { categoryId } = useParams(); //this is how the useParams hook is used
@@ -50,7 +50,9 @@ const Feed = () => {
   }
 
   //if there are pins in the state then render the MasonryLoayout and give it these pins as props
-  return <div>{pins && <MasonryLayout pins={pins} />}</div>;
+  return (
+    <div>{pins && <MasonryLayout pins={pins} visiblePins={visiblePins} />}</div>
+  );
 };
 
 export default Feed;

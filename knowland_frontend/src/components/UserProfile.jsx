@@ -23,7 +23,7 @@ const activeBtnStyles =
 const notActiveBtnStyles =
   "bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none";
 
-const UserProfile = () => {
+const UserProfile = ({ forwardedRef }) => {
   const [user, setUser] = useState(null);
   const [pins, setPins] = useState(null);
   const [text, setText] = useState("Created"); //cteaed or saved
@@ -35,12 +35,12 @@ const UserProfile = () => {
   const { userId } = useParams();
   const localUser = fetchUser(); //fetching user from localstorage
   const coverImageInput = useRef(null);
-  const scrollRef = useRef(null);
 
   const scrollToTop = () => {
-    scrollRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
+    forwardedRef?.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  //img
   //uploading image to sanity db
   const uploadImage = (e) => {
     if (e !== undefined) {
@@ -138,7 +138,7 @@ const UserProfile = () => {
   const unclickable = " w-full h-370 2xl:h-510 shadow-lg object-cover";
   return (
     <div
-      ref={scrollRef}
+      ref={forwardedRef}
       className="relative pb-2 h-full justify-center items-center overflow-y-scroll overscroll-contain"
     >
       <div className="felx flex-col">
@@ -193,7 +193,7 @@ const UserProfile = () => {
                 />
               )}
 
-              {userId === localUser.googleId && (
+              {userId === localUser.googleId && !coverImageAsset && (
                 <input
                   ref={coverImageInput}
                   type="file"
