@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom"; //importing navigation, by pressing a link element(without triggering a refresh) and by calling the navigate function
-import { IoIosAdd, ioMdAdd, IoMdSearch } from "react-icons/io"; //importing icons
+import { IoIosAdd, IoMdSearch } from "react-icons/io"; //importing icons
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();

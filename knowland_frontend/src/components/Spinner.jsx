@@ -1,5 +1,5 @@
 import React from "react";
-import { Circles, TailSpin } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 
 function Spinner({ message }) {
   return (

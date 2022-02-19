@@ -179,12 +179,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
       </div>
       <Link
         to={`/user-profile/${postedBy?._id}`}
-        //if current url is user-profile/blablabla then replace with
-        //    `/user-profile/${postedBy?._id}`
-        //else replace is false
-
-        // replace={location.pathname.startsWith("/user-profile/")}
-
         className="flex gap-2 mt-2 items-center"
       >
         <img

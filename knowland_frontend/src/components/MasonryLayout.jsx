@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Masonry from "react-masonry-css"; //importing masonry for a cool grd effect to render the pins in
 import Pin from "./Pin"; //inporting the pin componenet to map into
 //on screens 3000px break to the next line at 6 pins
@@ -13,20 +13,6 @@ const breakpointObj = {
 };
 
 const MasonryLayout = ({ pins, visiblePins }) => {
-  // const [visiblePins, setVisiblePins] = useState(20);
-  // const loadMorePins = () => {
-  //   setVisiblePins((prevVisablePins) => prevVisablePins + 20);
-  // };
-  //   // const scrollRef = useRef();
-  //   // const scrollable = useRef();
-
-  //   // useEffect(() => {
-  //   //   console.log(`effect`);
-  //   //   window.addEventListener("scroll", scrollHandler);
-
-  //   //   return () => window.removeEventListener("scroll", scrollHandler);
-  //   // }, []);
-
   return (
     <>
       <Masonry

@@ -36,13 +36,6 @@ const Login = () => {
       });
   };
 
-  // const responseGoogle = (response) => {
-  //   localStorage.setItem("user", JSON.stringify(response.profileObj)); //so that we can retreave the user data from it when we need to(in the Util. function)
-  //   const { name, googleId, imageUrl } = response.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
-
-  //   client.delete(googleId);
-  // };
-
   return (
     //check tailwind docs for the styling classes
     <div className="flex jusify-start items-center flex-col h-screen">
