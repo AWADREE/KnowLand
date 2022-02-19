@@ -18,7 +18,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   //getting all the saves of this pin (the likes of the pin) and comparing these ids of the users who posted these saves(postedBy._id) with the current user id
   //if that condition is true then get the length of that array
   const alreadySaved = !!save?.filter(
-    (item) => item.postedBy._id === user.googleId
+    (item) => item.postedBy._id === user?.googleId
   )?.length;
 
   //we check the length to get a number instead of an array as filter() returns an array,
@@ -36,10 +36,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .insert("after", "save[-1]", [
           {
             _key: uuidv4(),
-            userId: user.googleId,
+            userId: user?.googleId,
             postedBy: {
               _type: postedBy,
-              _ref: user.googleId,
+              _ref: user?.googleId,
             },
           },
         ])
@@ -57,7 +57,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
       setSavingPost(true);
       client
         .patch(id)
-        .unset([`save[userId == "${user.googleId}"]`])
+        .unset([`save[userId == "${user?.googleId}"]`])
         .commit()
         .then(() => {
           setSavingPost(false);

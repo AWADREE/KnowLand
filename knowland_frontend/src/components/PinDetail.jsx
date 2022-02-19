@@ -251,7 +251,7 @@ const PinDetail = ({ user, scrollToRef, visiblePins }) => {
                   : undefined}
               </a>
             </div>
-            {pinDetail.postedBy?._id === user._id && (
+            {pinDetail.postedBy?._id === user?._id && (
               <button
                 type="button"
                 onClick={(e) => {
