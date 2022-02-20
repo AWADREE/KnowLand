@@ -95,13 +95,22 @@ const CreatePin = ({ user }) => {
       )}
 
       <div className="flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full">
-        <div className=" bg-secondaryColor p-3 flex flex-0.7 w-full">
+        <div className=" bg-secondaryColor p-3 flex flex-0.7 w-full rounded-lg">
           <div className=" flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
             {loading && <Spinner />}
 
-            {wrongImageType && <p>Wrong image type</p>}
+            {wrongImageType && (
+              <div className="rounded-3xl bg-white p-2 px-3 m-2">
+                <p className="text-red-600 text-xl font-light">
+                  Wrong image type
+                </p>
+              </div>
+            )}
             {!imageAsset ? (
-              <label className="cursor-pointer bg-stone-50 p-5 rounded-xl">
+              <label
+                className="cursor-pointer bg-stone-50 p-5 rounded-xl"
+                style={{ maxWidth: "inherit" }}
+              >
                 <div className="flex flex-col items-center justify-center h-full">
                   <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-2xl">

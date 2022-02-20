@@ -192,16 +192,19 @@ const UserProfile = ({ forwardedRef }) => {
               )}
 
               {wrongImageType && (
-                <div className="absolute top-80 right-0 w-full">
+                <div className="absolute  2xl:top-80 top-32  right-0 w-full">
                   <div className="flex justify-center">
                     <div className="flex flex-col justify-center items-center p-2 rounded-2xl bg-white">
-                      <p className=" text-red-700 text-xl font-light">
+                      <p className=" text-red-600 text-xl font-light">
                         Wrong image type
                       </p>
-                      <p className=" text-red-700 text-xl font-light">
-                        Please use a .png, .svg, .jpeg, .gif or .tiff file
+                      <p className=" text-red-600 text-xl font-light">
+                        Please use a
                       </p>
-                      <p className=" text-red-700 font-light">
+                      <p className=" text-red-600 text-xl font-light">
+                        .png, .svg, .jpeg, .gif or .tiff file
+                      </p>
+                      <p className=" text-red-600 font-light">
                         recommanded 16 x 9
                       </p>
                     </div>
