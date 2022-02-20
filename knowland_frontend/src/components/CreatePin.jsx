@@ -123,7 +123,7 @@ const CreatePin = ({ user }) => {
                   type="file"
                   name="upload-image"
                   onChange={uploadImage}
-                  className="w-0 h-0 "
+                  className="w-0 h-0 p-0"
                 ></input>
               </label>
             ) : (
