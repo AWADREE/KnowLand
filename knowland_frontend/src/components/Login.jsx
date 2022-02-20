@@ -16,7 +16,7 @@ const Login = () => {
     //getting the profile object from the response and turning it into json,
     //and setting it to be the key value for the key name user in the local storage
     localStorage.setItem("user", JSON.stringify(response.profileObj)); //so that we can retreave the user data from it when we need to(in the Util. function)
-    const { name, googleId, imageUrl } = response.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
+    const { name, googleId, imageUrl } = response?.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
 
     const doc = {
       _id: googleId, //set the _id to the googleId we retreaved from the profileObj
@@ -35,13 +35,6 @@ const Login = () => {
         navigate("/", { replace: true }); //replace the current route with the new one
       });
   };
-
-  // const responseGoogle = (response) => {
-  //   localStorage.setItem("user", JSON.stringify(response.profileObj)); //so that we can retreave the user data from it when we need to(in the Util. function)
-  //   const { name, googleId, imageUrl } = response.profileObj; //destructuring the name, googleId, and imageUrl from the profileObj
-
-  //   client.delete(googleId);
-  // };
 
   return (
     //check tailwind docs for the styling classes

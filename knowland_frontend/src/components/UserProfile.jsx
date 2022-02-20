@@ -15,9 +15,6 @@ import { client, urlFor } from "../client";
 import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
 
-const randomImage =
-  "https://source.unsplash.com/1600x900/?nature,photography,technology";
-
 const activeBtnStyles =
   "bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none";
 const notActiveBtnStyles =
@@ -31,6 +28,7 @@ const UserProfile = ({ forwardedRef }) => {
   const [coverImageAsset, setCoverImageAsset] = useState(null);
   const [loading, setLoading] = useState(false);
   const [savingCover, setSavingCover] = useState(false);
+  const [wrongImageType, setWrongImageType] = useState(false);
   const navigate = useNavigate();
   const { userId } = useParams();
   const localUser = fetchUser(); //fetching user from localstorage
@@ -53,7 +51,7 @@ const UserProfile = ({ forwardedRef }) => {
         type === "image/gif" ||
         type === "image/tiff"
       ) {
-        // setWrongImageType(false);
+        setWrongImageType(false);
         setLoading(true);
 
         client.assets
@@ -70,7 +68,7 @@ const UserProfile = ({ forwardedRef }) => {
           });
       } else {
         // console.log("Wronge image type");
-        // setWrongImageType(true);
+        setWrongImageType(true);
       }
     }
   };
@@ -191,6 +189,25 @@ const UserProfile = ({ forwardedRef }) => {
                   className="w-full h-370 2xl:h-510 shadow-lg object-cover"
                   alt="banner-pic"
                 />
+              )}
+
+              {wrongImageType && (
+                <div className="absolute top-80 right-0 w-full">
+                  <div className="flex justify-center">
+                    <div className="flex flex-col justify-center items-center p-2 rounded-2xl bg-white">
+                      <p className=" text-red-700 text-xl font-light">
+                        Wrong image type
+                      </p>
+                      <p className=" text-red-700 text-xl font-light">
+                        Please use a .png, .svg, .jpeg, .gif or .tiff file
+                      </p>
+                      <p className=" text-red-700 font-light">
+                        recommanded 16 x 9
+                      </p>
+                    </div>
+                    {/* <div className="bg-red-500 md:w-20 "></div> */}
+                  </div>
+                </div>
               )}
 
               {userId === localUser.googleId && !coverImageAsset && (
