@@ -18,7 +18,7 @@ const CreatePin = ({ user }) => {
 
   const navigate = useNavigate(); //using the user navigation hook
   const validateFields = () => {
-    if (title && about && destination && imageAsset?._id && category) {
+    if (title && about && imageAsset?._id && category) {
       setFields(false);
     }
   };
@@ -166,7 +166,9 @@ const CreatePin = ({ user }) => {
               setTitle(e.target.value);
               validateFields();
             }}
-            placeholder="Add your title here"
+            placeholder={
+              fields ? "* Add your title here" : "Add your title here"
+            }
             className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
           />
           {user && (
@@ -186,7 +188,9 @@ const CreatePin = ({ user }) => {
               setAbout(e.target.value);
               validateFields();
             }}
-            placeholder="What is your pin about"
+            placeholder={
+              fields ? "* What is your pin about" : "What is your pin about"
+            }
             className="outline-none text-base sm:text-lg  border-b-2 border-gray-200 p-2"
           />
           <input
@@ -202,7 +206,7 @@ const CreatePin = ({ user }) => {
           <div className="flex flex-col">
             <div>
               <p className="mb-2 font-semibold text-lg sm:text-xl">
-                Chosse Pin Category
+                Choose Pin Category
               </p>
               <select
                 onChange={(e) => {
@@ -212,7 +216,7 @@ const CreatePin = ({ user }) => {
                 className="outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
               >
                 <option value="other" className="bg-white">
-                  Select Category
+                  {fields ? "* Select Category" : "Select Category"}
                 </option>
                 {categories.map((category, index) => (
                   <option
@@ -228,7 +232,7 @@ const CreatePin = ({ user }) => {
             {fields && (
               <div className="flex justify-center mt-3">
                 <p className="text-red-600 mb-5 text-xl transition-all duration-150 ease-in ">
-                  Please fill in all the fields
+                  Please fill in all the * required fields
                 </p>
               </div>
             )}
