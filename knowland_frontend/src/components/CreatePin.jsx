@@ -57,13 +57,22 @@ const CreatePin = ({ user }) => {
 
   //creating a sanity doc storing the info obtained from the user
   const savePin = () => {
-    if (title && about && destination && imageAsset?._id && category) {
+    if (title && about && imageAsset?._id && category) {
+      let trimmedTitle = title.trim();
+      let trimmedAbout = about.trim();
+      let trimmedDestintaion;
+      if (destination.trim()) {
+        trimmedDestintaion = destination.trim();
+      } else {
+        trimmedDestintaion = null;
+      }
+
       const doc = {
         _type: "pin",
         //when the key and value pairs are of the same name we can just write it like this
-        title,
-        about,
-        destination,
+        title: trimmedTitle,
+        about: trimmedAbout,
+        destination: trimmedDestintaion,
         image: {
           _type: "image",
           //becouse images are stored as assets somewhere else in sanity's system
@@ -187,7 +196,7 @@ const CreatePin = ({ user }) => {
               setDestination(e.target.value);
               validateFields();
             }}
-            placeholder="Add a destination link"
+            placeholder="Add a destination link (optional)"
             className="outline-none text-base sm:text-lg  border-b-2 border-gray-200 p-2"
           />
           <div className="flex flex-col">

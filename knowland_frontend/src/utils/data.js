@@ -2,6 +2,11 @@
 
 export const categories = [
   {
+    name: "fashion",
+    image:
+      "https://image.shutterstock.com/image-photo/beauty-fashion-brunette-model-girl-260nw-604254707.jpg",
+  },
+  {
     name: "cars",
     image:
       "https://exclusivecarmodels.com/331-home_default/lamborghini-aventador-lp-780-4-ultimae-roadster-looksmart-ls532b-pasifae-violet.jpg",
