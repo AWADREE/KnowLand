@@ -244,9 +244,9 @@ const PinDetail = ({ user, scrollToRef, visiblePins }) => {
                 </a>
               </div>
               <a href={pinDetail.destination} target="_blank" rel="noreferrer">
-                {pinDetail.destination.slice(8).length > 0
-                  ? pinDetail.destination.length > 30
-                    ? pinDetail.destination.slice(0, 30) + "..."
+                {pinDetail.destination?.slice(8).length > 0
+                  ? pinDetail.destination?.length > 30
+                    ? pinDetail.destination?.slice(0, 30) + "..."
                     : pinDetail.destination
                   : undefined}
               </a>
