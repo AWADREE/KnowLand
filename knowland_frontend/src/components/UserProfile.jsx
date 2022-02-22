@@ -107,6 +107,11 @@ const UserProfile = ({ forwardedRef }) => {
   }, [userId]);
 
   useEffect(() => {
+    setText("Created");
+    setActiveBtn("created");
+  }, [userId]);
+
+  useEffect(() => {
     if (text === "Created") {
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
@@ -148,7 +153,7 @@ const UserProfile = ({ forwardedRef }) => {
                   <button
                     type="button"
                     disabled={savingCover}
-                    className="mb-1 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                    className="mb-1 p-3 rounded-full bg-red-300 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out hover:bg-red-400"
                     onClick={() => {
                       setCoverImageAsset(null);
                     }}
@@ -159,7 +164,7 @@ const UserProfile = ({ forwardedRef }) => {
                   <button
                     type="button"
                     disabled={savingCover}
-                    className="mb-2 mt-1 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
+                    className="mb-2 mt-1 p-3 rounded-full bg-green-300 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out hover:bg-green-400"
                     onClick={() => {
                       saveCover();
                     }}
