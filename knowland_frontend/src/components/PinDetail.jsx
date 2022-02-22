@@ -8,6 +8,7 @@ import { client, urlFor } from "../client"; //sanity config and image url maker
 import MasonryLayout from "./MasonryLayout"; //the componenet that contains all the pins
 import { pinDetailQuery, pinDetailAdvancedMorePinsQuery } from "../utils/data"; //sanity queries
 import Spinner from "./Spinner"; //loading animation componenet
+import Comment from "./Comment"; //loading animation componenet
 import { useRef } from "react";
 
 const PinDetail = ({ user, scrollToRef, visiblePins }) => {
@@ -290,20 +291,11 @@ const PinDetail = ({ user, scrollToRef, visiblePins }) => {
             {pinDetail?.comments
               ?.slice(0, visibleComments)
               .map((comment, i) => (
-                <div
-                  className="flex gap-2 mt-5 items-center bg-white rounded-lg"
+                <Comment
+                  comment={comment}
+                  user={user && user}
                   key={i}
-                >
-                  <img
-                    src={comment.postedBy.image}
-                    alt="user-profile"
-                    className="w-10 h-10 rounded-full cursor-pointer"
-                  />
-                  <div className="flex flex-col">
-                    <p className="font-bold">{comment.postedBy.userName}</p>
-                    <p>{comment.comment}</p>
-                  </div>
-                </div>
+                ></Comment>
               ))}
           </div>
           {pinDetail?.comments?.length > visibleComments && (
