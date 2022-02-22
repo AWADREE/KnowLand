@@ -58,12 +58,16 @@ const CreatePin = ({ user }) => {
   //creating a sanity doc storing the info obtained from the user
   const savePin = () => {
     if (title && about && destination && imageAsset?._id && category) {
+      let trimmedTitle = title.trim();
+      let trimmedAbout = about.trim();
+      let trimmedDestintaion = destination.trim();
+
       const doc = {
         _type: "pin",
         //when the key and value pairs are of the same name we can just write it like this
-        title,
-        about,
-        destination,
+        title: trimmedTitle,
+        about: trimmedAbout,
+        destination: trimmedDestintaion,
         image: {
           _type: "image",
           //becouse images are stored as assets somewhere else in sanity's system
